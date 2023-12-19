@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Tracker</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .screen {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .footer {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .status {
+            padding: 20px;
+        }
+
+        img {
+            width: 80px;
+            margin: 10px auto; /* Center the image horizontally */
+            display: block;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #emitter {
+            height: 10px;
+            background-color: #4CAF50;
+            margin-top: 10px;
+        }
+
+        #drinkedWater {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #celebration {
+            display: none;
+            color: black;
+            font-size: 20px;
+            margin-top: 10px;
+            background-color: yellow;
+            border: 01px solid black;
+            border-radius:9px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="screen shadow">
+        <div class="navbar">
+            <span style="font-size: 20px; font-weight: bold;">Water Intake Tracker</span>
+        </div>
+        <div class="status">
+            <span style="font-size: 20px">TODAY</span><br>
+            <span id="drinkedWater" style="font-size: 30px; font-weight: bold">0</span><span
+                style="font-size: 30px; font-weight: bold">L of 8L</span><br>
+            <img src="https://i.ibb.co/ZGqLJJH/water.png" alt="Bottle Image"></img><br>
+            <div id="celebration"></div>
+            <div id="emitter"></div>
+            <button onclick="drinkWater(0.2)">0.2L</button>
+            <button onclick="drinkWater(0.5)">0.5L</button>
+            <button onclick="drinkWater(0.7)">0.7L</button>
+            <button onclick="drinkWater(1)">1L</button>
+            <button onclick="resetWater()">Reset</button>
+            
+        </div>
+        <div class="navbar">
+            <span style="font-size: 15px; font-weight: bold; color:black;">Made by Mukund Kumar</span>
+        </div>
+    </div>
+
+    <script>
+        
+        function drinkWater(amount) {
+            
+            if (localStorage.getItem('totalWater')) {
+               
+                let totalWater = parseFloat(localStorage.getItem('totalWater'));
+                totalWater += amount;
+                localStorage.setItem('totalWater', totalWater.toFixed(1));
+
+                
+                if (totalWater >= 8) {
+                    celebrate();
+                }
+            } else {
+                
+                localStorage.setItem('totalWater', amount.toFixed(1));
+            }
+
+           
+            updateTotalWater();
+        }
+
+        
+        function updateTotalWater() {
+            let totalWater = localStorage.getItem('totalWater') || 0;
+            document.getElementById('drinkedWater').textContent = totalWater;
+        }
+
+        
+        function resetWater() {
+            localStorage.removeItem('totalWater');
+            updateTotalWater();
+            hideCelebration();
+        }
+
+        
+        function celebrate() {
+            document.getElementById('celebration').textContent = 'Wow! Congratulations!';
+            document.getElementById('celebration').style.display = 'block';
+            setTimeout(hideCelebration, 4000);
+        }
+
+        
+        function hideCelebration() {
+            document.getElementById('celebration').style.display = 'none';
+        }
+
+        
+        window.addEventListener('load', updateTotalWater);
+    </script>
+
+</body>
+
+</html>

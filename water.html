@@ -36,7 +36,7 @@
             display: flex;
             justify-content: center;
         }
-        
+
         .footer {
             background-color: #4CAF50;
             color: #fff;
@@ -68,8 +68,19 @@
 
         #emitter {
             height: 10px;
-            background-color: #4CAF50;
+            background-color: ;
             margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            border: 01px solid black;
+            border-radius: 5px;
+        }
+
+        #emitter .progress {
+            width: 0;
+            height: 100%;
+            background-color: #20a8fd;
+            transition: width 0.3s ease;
         }
 
         #drinkedWater {
@@ -84,7 +95,7 @@
             margin-top: 10px;
             background-color: yellow;
             border: 01px solid black;
-            border-radius:9px;
+            border-radius: 9px;
         }
     </style>
 </head>
@@ -101,69 +112,78 @@
                 style="font-size: 30px; font-weight: bold">L of 8L</span><br>
             <img src="https://i.ibb.co/ZGqLJJH/water.png" alt="Bottle Image"></img><br>
             <div id="celebration"></div>
-            <div id="emitter"></div>
+            <div id="emitter">
+                <div class="progress"></div>
+            </div>
             <button onclick="drinkWater(0.2)">0.2L</button>
             <button onclick="drinkWater(0.5)">0.5L</button>
             <button onclick="drinkWater(0.7)">0.7L</button>
             <button onclick="drinkWater(1)">1L</button>
             <button onclick="resetWater()">Reset</button>
-            
+
         </div>
-        <div class="navbar">
+        <div class="footer">
             <span style="font-size: 15px; font-weight: bold; color:black;">Made by Mukund Kumar</span>
         </div>
     </div>
 
     <script>
-        
         function drinkWater(amount) {
-            
+
             if (localStorage.getItem('totalWater')) {
-               
+
                 let totalWater = parseFloat(localStorage.getItem('totalWater'));
                 totalWater += amount;
                 localStorage.setItem('totalWater', totalWater.toFixed(1));
 
-                
                 if (totalWater >= 8) {
                     celebrate();
                 }
             } else {
-                
+
                 localStorage.setItem('totalWater', amount.toFixed(1));
             }
 
-           
             updateTotalWater();
+            updateProgressBar();
         }
 
-        
         function updateTotalWater() {
             let totalWater = localStorage.getItem('totalWater') || 0;
             document.getElementById('drinkedWater').textContent = totalWater;
         }
 
-        
+        function updateProgressBar() {
+            let totalWater = localStorage.getItem('totalWater') || 0;
+            let progress = (totalWater / 8) * 100;
+            document.querySelector('#emitter .progress').style.width = progress + '%';
+        }
+
         function resetWater() {
             localStorage.removeItem('totalWater');
             updateTotalWater();
             hideCelebration();
+            resetProgressBar();
         }
 
-        
         function celebrate() {
             document.getElementById('celebration').textContent = 'Wow! Congratulations!';
             document.getElementById('celebration').style.display = 'block';
             setTimeout(hideCelebration, 4000);
         }
 
-        
         function hideCelebration() {
             document.getElementById('celebration').style.display = 'none';
         }
 
-        
-        window.addEventListener('load', updateTotalWater);
+        function resetProgressBar() {
+            document.querySelector('#emitter .progress').style.width = '0';
+        }
+
+        window.addEventListener('load', () => {
+            updateTotalWater();
+            updateProgressBar();
+        });
     </script>
 
 </body>

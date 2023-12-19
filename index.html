@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Water Tracker</title>
+    <title>Water Tracker | Mukund</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
@@ -16,7 +16,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            flex-direction: column;
             background-color: #f5f5f5;
         }
 
@@ -27,7 +27,7 @@
             overflow: hidden;
             width: 300px;
             text-align: center;
-            
+            margin: 0px auto;
         }
 
         .navbar {
@@ -52,7 +52,7 @@
 
         img {
             width: 80px;
-            margin: 10px auto; /* Center the image horizontally */
+            margin: 10px auto; 
             display: block;
         }
 
@@ -117,7 +117,7 @@
 
         .reset-button img {
             width: 18px; 
-            height: 18px; /* Adjust the height of the image as needed */
+            height: 18px; 
         }
         a {
             color: blue;
@@ -127,7 +127,7 @@
 
 <body>
 
-    <div class="screen shadow">
+    <div class="screen">
         <div class="navbar">
             <span style="font-size: 20px; font-weight: bold;">Water Intake Tracker</span>
         </div>
@@ -135,7 +135,7 @@
             <span style="font-size: 20px">TODAY</span><br>
             <span id="drinkedWater" style="font-size: 30px; font-weight: bold">0</span><span
                 style="font-size: 30px; font-weight: bold">L of 8L</span><br>
-            <img src="https://i.ibb.co/ZGqLJJH/water.png" alt="Bottle Image"></img><br>
+            <img src="https://i.ibb.co/ZGqLJJH/water.png" alt="Bottle Image"><br>
             <div id="celebration"></div>
             <div id="emitter">
                 <div class="progress"></div>
@@ -145,16 +145,18 @@
             <button onclick="drinkWater(0.7)">0.7L</button>
             <button onclick="drinkWater(1)">1L</button>
             <button onclick="resetWater()" class="reset-button">
-    <img src="https://www.svgrepo.com/show/501336/reset.svg" alt="Reset Image" style="margin-right: 5px;"> Reset it
-</button>
-
-
+                <img src="https://www.svgrepo.com/show/501336/reset.svg" alt="Reset Image"
+                    style="margin-right: 5px;"> Reset it
+            </button>
         </div>
         <div class="footer">
-            <span style="font-size: 15px; font-weight: bold;;">Made by <a href="https://www.instagram.com/mukundkumarofficial/">Mukund Kumar</a></span>
+            <span style="font-size: 15px; font-weight: bold;">Made by <a
+                    href="https://www.instagram.com/mukundkumarofficial/">Mukund Kumar</a></span>
         </div>
     </div>
-    * This records real-time data & old data 
+    <div>
+        <span>* This records real-time data & old data </span>
+    </div>
 
     <script>
         function drinkWater(amount) {

@@ -38,8 +38,8 @@
         }
 
         .footer {
-            background-color: #4CAF50;
-            color: #fff;
+            background-color: gray;
+            color: black;
             padding: 10px;
             display: flex;
             justify-content: center;
@@ -56,7 +56,7 @@
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: black;
             color: #fff;
             padding: 10px;
             margin-top: 20px;
@@ -97,6 +97,27 @@
             border: 01px solid black;
             border-radius: 9px;
         }
+        .reset-button {
+            background-color: white;
+            color: black;
+            padding: 0px 25px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 900;
+            display: flex;
+            border: 01px solid black;
+            align-items: center;
+            justify-content: center;
+            margin: 08px auto 0px auto;
+        }
+
+        .reset-button img {
+            width: 18px; 
+            height: 18px; /* Adjust the height of the image as needed */
+        }
     </style>
 </head>
 
@@ -119,11 +140,14 @@
             <button onclick="drinkWater(0.5)">0.5L</button>
             <button onclick="drinkWater(0.7)">0.7L</button>
             <button onclick="drinkWater(1)">1L</button>
-            <button onclick="resetWater()">Reset</button>
+            <button onclick="resetWater()" class="reset-button">
+    <img src="https://www.svgrepo.com/show/501336/reset.svg" alt="Reset Image" style="margin-right: 5px;"> Reset it
+</button>
+
 
         </div>
         <div class="footer">
-            <span style="font-size: 15px; font-weight: bold; color:black;">Made by Mukund Kumar</span>
+            <span style="font-size: 15px; font-weight: bold;;">Made by Mukund Kumar</span>
         </div>
     </div>
 
@@ -169,7 +193,7 @@
         function celebrate() {
             document.getElementById('celebration').textContent = 'Wow! Congratulations!';
             document.getElementById('celebration').style.display = 'block';
-            setTimeout(hideCelebration, 4000);
+            setTimeout(hideCelebration, 3000);
         }
 
         function hideCelebration() {
